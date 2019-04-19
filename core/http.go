@@ -5,6 +5,12 @@ import (
 	"net/http"
 )
 
+// An Client performs http.Requests. It captures the Do
+// method of the http.Client.
+type Client interface {
+	Do(*http.Request) (*http.Response, error)
+}
+
 // ClientOptions are options that can be set on the HTTP client.
 type ClientOptions struct {
 	APIToken string
@@ -14,10 +20,19 @@ type ClientOptions struct {
 	SessionKey string
 
 	InsecureSkipVerify bool
+
+	// If set, Client will be used to execute HTTP requests.
+	// Otherwise, one is created with default settings and
+	// InsecureSkipVerify respected.
+	Client Client
 }
 
 // makeHttpClient creates a new HTTP client for making API requests.
-func makeHTTPClient(options *ClientOptions) *http.Client {
+func makeHTTPClient(options *ClientOptions) Client {
+	if options.Client != nil {
+		return options.Client
+	}
+
 	return &http.Client{
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{
