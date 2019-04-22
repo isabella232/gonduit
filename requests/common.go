@@ -23,14 +23,15 @@ func (r *Request) SetMetadata(metadata *ConduitMetadata) {
 
 // ConduitMetadata contains auth/API metadata included on Conduit requests.
 type ConduitMetadata struct {
-	Scope         string `json:"scope,omitempty"`
-	ConnectionID  string `json:"connectionID,omitempty"`
-	AuthType      string `json:"auth.type,omitempty"`
-	AuthHost      string `json:"auth.host,omitempty"`
-	AuthKey       string `json:"auth.key,omitempty"`
-	AuthUser      string `json:"auth.user,omitempty"`
-	AuthSignature string `json:"auth.signature,omitempty"`
-	Token         string `json:"token,omitempty"`
-	AccessToken   string `json:"access_token,omitempty"`
-	SessionKey    string `json:"sessionKey,omitempty"`
+	Scope         string      `json:"scope,omitempty"`
+	ConnectionID  string      `json:"connectionID,omitempty"`
+	AuthType      string      `json:"auth.type,omitempty"`
+	AuthHost      string      `json:"auth.host,omitempty"`
+	AuthKey       string      `json:"auth.key,omitempty"`
+	AuthUser      string      `json:"auth.user,omitempty"`
+	AuthSignature string      `json:"auth.signature,omitempty"`
+	Token         string      `json:"token,omitempty"`
+	AccessToken   string      `json:"access_token,omitempty"`
+	SessionKey    string      `json:"sessionKey,omitempty"`
+	Attachments   interface{} `json:"attachments,omitempty"`
 }
